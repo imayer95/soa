@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Warehouse operations</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a class="active" href="products">Products</a></li>
+                <li><a href="lowStock">Low Stock Products</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Products</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2">
+                <form action="/product/All" method="post">
+                    <input type="submit" name="buttonSum" value="Warehouses"/>
+                </form>
+            </div>
+            <div class="col-sm-2">
+                <form action="/product/warehouse1" method="post">
+                    <input type="submit" name="buttonSum" value="Warehouse 1"/>
+                </form>
+            </div>
+            <div class="col-sm-2">
+                <form action="/product/warehouse2" method="post">
+                    <input type="submit" name="buttonSum" value="Warehouse 2"/>
+                </form>
+            </div>
+            <div class="col-sm-2">
+                <form action="/product/warehouse3" method="post">
+                    <input type="submit" name="buttonSum" value="Warehouse 3"/>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <caption>Table containing the products in all warehouses</caption>
+
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <th:block th:each="product :${products}">
+            <tr>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.quantity}"></td>
+            </tr>
+        </th:block>
+        </tbody>
+
+    </table>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/sum" method="post">
+                    <input type="submit" name="buttonSum" value="Price Sum"/>
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <label th:text="${sum}"></label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/quantity" method="post">
+                    <input type="submit" name="buttonSum" value="Quantity Sum"/>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <label th:text="${quantity}"></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/prodLowStock" method="post">
+                    <input type="submit" name="buttonLowStock" value="Product Min Stock"/>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <label th:text="${minStock!=null ? minStock.name : null}"></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/prodMaxStock" method="post">
+                    <input type="submit" name="buttonMaxStock" value="Product Max Stock"/>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <label th:text="${maxStock!=null ? maxStock.name : null}"></label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/maxQuantity" method="post">
+                    <input type="submit" name="buttonQuantityMax" value="Quantity Max"/>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <label th:text="${maxQuantity}"></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/maxPrice" method="post">
+                    <input type="submit" name="buttonPriceMax" value="Price Max"/>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <label th:text="${maxPrice}"></label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/minQuantity" method="post">
+                    <input type="submit" name="buttonQuantityMin" value="Quantity Min"/>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <label th:text="${minQuantity}"></label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/minPrice" method="post">
+                    <input type="submit" name="buttonPriceMin" value="Price Min"/>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <label th:text="${minPrice}"></label>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+<!-- /.container -->
+
+<script type="text/javascript"
+        src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

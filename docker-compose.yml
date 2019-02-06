@@ -1,0 +1,41 @@
+version: '2'
+services:
+  warehouse1:
+    container_name: warehouse1
+    build:
+      context: warehouse/
+      dockerfile: docker/Dockerfile1
+    ports:
+      - "8081:8081"
+  warehouse2:
+    container_name: warehouse2
+    build:
+      context: warehouse
+      dockerfile: docker/Dockerfile2
+    ports:
+      - "8082:8082"
+  warehouse3:
+    container_name: warehouse3
+    build:
+      context: warehouse
+      dockerfile: docker/Dockerfile3
+    ports:
+      - "8083:8083"
+  operations:
+    container_name: operations
+    build:
+      context: operations
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      WAREHOUSE1_HOST: warehouse1
+      WAREHOUSE1_PORT: 8081
+      WAREHOUSE2_HOST: warehouse2
+      WAREHOUSE2_PORT: 8082
+      WAREHOUSE3_HOST: warehouse3
+      WAREHOUSE3_PORT: 8083
+    depends_on:
+      - warehouse1
+      - warehouse2
+      - warehouse3
